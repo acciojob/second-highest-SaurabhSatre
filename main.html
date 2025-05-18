@@ -8,23 +8,30 @@
 
 <body>	
 	<script>
-		function secondHighest(arr) {
-			if (arr.length < 2) return undefined;   // need at least two values
+	function secondHighest(arr) {
+		arr = arr.map(Number);
 
-  let max     = -Infinity;   // current largest
-  let second  = -Infinity;   // current 2nd largest
+	    if (arr.length < 2) return -Infinity;
 
-  for (let i = 0; i < arr.length; i++) {
-    const val = arr[i];
+	    const unique = new Set(arr);
 
-    if (val > max) {
-      // new record: push old max down to second
-      second = max;
-      max = val;
-    } else if (val > second && val < max) {
-    
-      second = val;
-    }
+	    if (unique.size < 2) {
+	      return -Infinity;
+		}
+
+	    let max = -Infinity;
+	    let secondMax = -Infinity;
+
+		    unique.forEach(num => {
+		      if (num > max) {
+		        secondMax = max;
+		        max = num;
+			} else if (num > secondMax && num < max) {
+        secondMax = num;
+      }
+    });
+
+    return secondMax;
   }
 
   return second === -Infinity ? undefined : second;

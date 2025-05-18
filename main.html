@@ -9,7 +9,25 @@
 <body>	
 	<script>
 		function secondHighest(arr) {
-			//Write your code here
+			if (arr.length < 2) return undefined;   // need at least two values
+
+  let max     = -Infinity;   // current largest
+  let second  = -Infinity;   // current 2nd largest
+
+  for (let i = 0; i < arr.length; i++) {
+    const val = arr[i];
+
+    if (val > max) {
+      // new record: push old max down to second
+      second = max;
+      max = val;
+    } else if (val > second && val < max) {
+    
+      second = val;
+    }
+  }
+
+  return second === -Infinity ? undefined : second;
 			
 		}
 
